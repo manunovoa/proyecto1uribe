@@ -4,6 +4,7 @@ import org.example.clasesHalloween.Fiesta;
 import org.example.clasesHalloween.Invitado;
 import org.example.clasesHalloween.Lugar;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -11,17 +12,14 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner entradaPorTeclado=new Scanner(System.in);
-        Invitado objetoInvitado = new Invitado();
         Lugar objetoLugar = new Lugar();
         Fiesta objetoFiesta = new Fiesta();
 
+        //Creando nuestro primer arraylist
+        ArrayList <Invitado> invitados=new ArrayList<Invitado>();
+
         System.out.println("****** GRAN FIESTA GRUPO URIBE********");
         System.out.println("**************************************");
-
-        System.out.println("Digita el aforo del lugar de la fiesta: ");
-        objetoLugar.setAforo(entradaPorTeclado.nextInt());
-        int aforoGlobal=objetoLugar.getAforo();
-        Invitado [] invitados = new Invitado[objetoLugar.getAforo()];
 
         //CICLO PARA UBICAR INVITADOS DENTRO DEL AFORO
         int variableDeControl=0;
@@ -32,8 +30,6 @@ public class Main {
         System.out.println("2. Registro de la fiesta");
         System.out.println("3. Registro de Invitado");
         System.out.println("4. Ver Invitados");
-
-
 
 
         do{
@@ -62,18 +58,44 @@ public class Main {
                     objetoFiesta.setCostosEquipos(entradaPorTeclado.nextDouble());
                     break;
                 case 3:
-                    int contadorDeInvitado=aforoGlobal-objetoLugar.getAforo();
-                    System.out.print("Digita el nombre del invitado: ");
-                    invitados[contadorDeInvitado]=new Invitado();
-                    invitados[contadorDeInvitado].setNombres(entradaPorTeclado.next());
-                    objetoLugar.setAforo(objetoLugar.getAforo()-1);
+
+                    if(objetoLugar.getAforo()>=1){
+
+                        //Restamos en 1 el aforo total cada que entra alguien a la fiesta
+                        objetoLugar.setAforo(objetoLugar.getAforo()-1);
+
+                        //si voy a guardar objetos de una clase CUALQUIERA
+                        //en un arraylist, primero debo crear un objeto de
+                        //ESA CLASE CUALQUIERA
+                        Invitado objetoInvitado = new Invitado();
+
+                        //LLENAR/PEDIR ALMACENAR/SETEAR/LLEVAR LOS ATRIBUTOS
+                        //DEL OBJETO QUE ACABO DE CREAR
+                        System.out.println("Digita el nombre del invitado: ");
+                        objetoInvitado.setNombres(entradaPorTeclado.next());
+
+                        //si ya llene mi objeto entonces agregamos
+                        //el objeto a la lista
+                        invitados.add(objetoInvitado);
+
+                    }else{
+
+                        System.out.println("Aragan, no te enra mas gente ahi");
+
+
+                    }
 
                     break;
                 case 4:
-                    for(int i=0; i<invitados.length; i++){
-                        System.out.println(invitados[i].getNombres());
+
+                    //COMO RECORRO UN ARRAYLIST?
+                    //con un ciclo for ADAPTADO recorremos facillmente un ARRAYLIST
+                    for(Invitado invitado:invitados){
+
+                        System.out.println(invitado.getNombres());
 
                     }
+
                     break;
 
                 default:
