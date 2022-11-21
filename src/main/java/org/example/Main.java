@@ -18,7 +18,7 @@ public class Main {
         //Creando nuestro primer arraylist
         ArrayList <Invitado> invitados=new ArrayList<Invitado>();
 
-        System.out.println("****** GRAN FIESTA GRUPO URIBE********");
+        System.out.println("****** GRAN FIESTA GRUPO URIBE *******");
         System.out.println("**************************************");
 
         //CICLO PARA UBICAR INVITADOS DENTRO DEL AFORO
@@ -30,6 +30,8 @@ public class Main {
         System.out.println("2. Registro de la fiesta");
         System.out.println("3. Registro de Invitado");
         System.out.println("4. Ver Invitados");
+        System.out.println("5. Ver Costos");
+        System.out.println("6. Ver ganancias");
 
 
         do{
@@ -96,6 +98,14 @@ public class Main {
 
                     }
 
+                    break;
+                case 5:
+                    System.out.println("El costo de la fiesta fue: "+objetoFiesta.calcularCostosTotales());
+                    break;
+                case 6:
+                    //LLAMAR EL METODO QUE CALCULA GANANCIAS
+                    double ganancias=objetoFiesta.calcularGanancias(invitados.size());
+                    System.out.println("Las ganancias fueron: "+ganancias);
                     break;
 
                 default:
